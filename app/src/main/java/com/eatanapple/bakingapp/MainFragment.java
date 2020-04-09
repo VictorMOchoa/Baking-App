@@ -1,6 +1,7 @@
 package com.eatanapple.bakingapp;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -63,8 +64,22 @@ public class MainFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        // Since we rely on getting json from an api, we must first check that we have connectivity
+        if (networkIsAvailable()) {
+            // Stub for now, we will populate json here
+        } else {
+            // Show message that we do not have connectivity
+        }
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_main, container, false);
+    }
+
+    private boolean networkIsAvailable() {
+        ConnectivityManager cm = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected();
     }
 
     // TODO: Rename method, update argument and hook method into UI event
