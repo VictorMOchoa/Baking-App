@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import retrofit2.Retrofit;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -67,7 +69,11 @@ public class MainFragment extends Fragment {
 
         // Since we rely on getting json from an api, we must first check that we have connectivity
         if (networkIsAvailable()) {
-            // Stub for now, we will populate json here
+            String API_URL = "";
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(API_URL)
+                    .build();
+
         } else {
             // Show message that we do not have connectivity
         }
@@ -78,7 +84,6 @@ public class MainFragment extends Fragment {
 
     private boolean networkIsAvailable() {
         ConnectivityManager cm = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-
         return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnected();
     }
 
