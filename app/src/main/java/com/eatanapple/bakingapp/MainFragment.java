@@ -6,6 +6,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.SyncStateContract;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,8 @@ import com.eatanapple.bakingapp.dto.Recipe;
 import java.io.IOException;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,6 +32,9 @@ public class MainFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private RecipeAdapter recipeAdapter;
+    @BindView(R.id.recipes_rv)
+    public RecyclerView recipesRecyclerView;
 
 
     public MainFragment() {
@@ -53,14 +60,11 @@ public class MainFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // Inflate the view now/save as a variable for use in binding with butterknife
+        View view = inflater.inflate(R.layout.fragment_main, container, false);
+        ButterKnife.bind(this, view);
 
         // Since we rely on getting json from an api, we must first check that we have connectivity
         if (networkIsAvailable()) {
@@ -78,7 +82,12 @@ public class MainFragment extends Fragment {
                 bakingRecipe.getAllRecipes().enqueue(new Callback<List<Recipe>>() {
                     @Override
                     public void onResponse(Call<List<Recipe>> call, Response<List<Recipe>> response) {
-                        System.out.println(response.body().toString());
+                        recipeAdapter = new RecipeAdapter(getActivity(), response.body());
+                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+                        System.out.println(recipesRecyclerView);
+                        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+                        recipesRecyclerView.setLayoutManager(linearLayoutManager);
+                        recipesRecyclerView.setAdapter(recipeAdapter);
                     }
 
                     @Override
@@ -90,8 +99,7 @@ public class MainFragment extends Fragment {
             // Show message that we do not have connectivity
         }
 
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_main, container, false);
+        return view;
     }
 
     private boolean networkIsAvailable() {
