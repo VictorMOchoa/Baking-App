@@ -84,7 +84,6 @@ public class MainFragment extends Fragment {
                     public void onResponse(Call<List<Recipe>> call, Response<List<Recipe>> response) {
                         recipeAdapter = new RecipeAdapter(getActivity(), response.body());
                         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-                        System.out.println(recipesRecyclerView);
                         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
                         recipesRecyclerView.setLayoutManager(linearLayoutManager);
                         recipesRecyclerView.setAdapter(recipeAdapter);

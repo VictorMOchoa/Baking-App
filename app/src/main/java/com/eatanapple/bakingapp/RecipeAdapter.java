@@ -5,9 +5,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.eatanapple.bakingapp.dto.Recipe;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -31,6 +33,13 @@ public class RecipeAdapter  extends RecyclerView.Adapter<RecipeAdapter.RecipeVie
 
     @Override
     public void onBindViewHolder(RecipeViewHolder holder, int position) {
+        // Set the picture
+        if (recipes.get(position).getImage().isEmpty()) {
+            Picasso.get().load(R.drawable.cooking_icon).into(holder.pic);
+        } else {
+            Picasso.get().load(recipes.get(position).getImage()).into(holder.pic);
+        }
+        // Set the textview
         holder.example.setText(recipes.get(position).getName());
     }
 
@@ -43,6 +52,8 @@ public class RecipeAdapter  extends RecyclerView.Adapter<RecipeAdapter.RecipeVie
 
         @BindView(R.id.ex_text)
         TextView example;
+        @BindView(R.id.iv_pic)
+        ImageView pic;
 
         public RecipeViewHolder(View itemView) {
             super(itemView);
