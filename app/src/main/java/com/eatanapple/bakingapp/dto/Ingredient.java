@@ -1,5 +1,9 @@
 package com.eatanapple.bakingapp.dto;
 
+import android.os.Parcelable;
+
+import java.io.Serializable;
+
 public class Ingredient {
 
     private String ingredient;

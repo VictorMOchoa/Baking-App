@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <android.support.v7.widget.CardView
-        android:id="@+id/cardView"
+        android:id="@+id/recipe_card"
         cardCornerRadius="4dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,7 +21,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/iv_pic"
+                android:id="@+id/food_thumbnail_iv"
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:layout_margin="8dp"
@@ -34,13 +34,13 @@
                 app:srcCompat="@android:color/background_dark" />
 
             <TextView
-                android:id="@+id/ex_text"
+                android:id="@+id/recipe_name_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:textSize="18sp"
-                app:layout_constraintStart_toEndOf="@+id/iv_pic"
+                app:layout_constraintStart_toEndOf="@+id/food_thumbnail_iv"
                 app:layout_constraintTop_toTopOf="parent" />
         </android.support.constraint.ConstraintLayout>
 
