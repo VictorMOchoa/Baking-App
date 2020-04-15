@@ -6,6 +6,12 @@
     android:layout_height="match_parent"
     tools:context="com.eatanapple.bakingapp.MainActivity">
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </FrameLayout>
+
     <fragment
         android:id="@+id/main_fragment"
         android:name="com.eatanapple.bakingapp.MainFragment"

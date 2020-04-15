@@ -26,7 +26,7 @@ import butterknife.ButterKnife;
 
 import static com.eatanapple.bakingapp.Constants.*;
 
-public class RecipeAdapter  extends RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder> {
+public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder> {
     private Context context;
     private List<Recipe> recipes;
 
